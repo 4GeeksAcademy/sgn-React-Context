@@ -1,20 +1,20 @@
 import React from "react";
 import { Link } from 'react-router-dom';
-import { useContext, useEffect  } from 'react';
+import { useContext, useEffect,useState  } from 'react';
 import { Context } from '../store/appContext';
 import personaImage from "../../img/persona.jpg";
 import "../../styles/home.css";
 
 export const Home = () => {
 	const { store, actions } = useContext(Context);
-	const [selectedContactId, setSelectedContactId] = useState(null);
+
 
 useEffect(() => {
 	actions.GetContacts();
 }, []);
-const handleDelete = () => {
-	actions.DeleteContact(selectedContactId); // Llama a la acción para eliminar el contacto
-	setSelectedContactId(null); // Limpia el estado después de eliminar
+const handleDelete = (contacto) => {
+	actions.deleteContact(contacto); // Llama a la acción para eliminar el contacto
+	
 };
 
 return (
@@ -39,8 +39,7 @@ return (
 						<button
 							type="button"
 							className="btn btn-link"
-							data-bs-toggle="modal"
-							data-bs-target="#deleteModal"
+							onClick={()=> handleDelete (contact.id)}
 						>
 							<i className="fa-solid fa-trash"></i>
 						</button>
@@ -53,26 +52,7 @@ return (
 			))
 		)}
 
-		{/* Modal */}
-		<div className="modal fade" id="deleteModal" tabIndex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
-			<div className="modal-dialog" role="document">
-				<div className="modal-content">
-					<div className="modal-header">
-						<h5 className="modal-title">Are you sure?</h5>
-						<button type="button" className="close btn-secondary" data-dismiss="modal" aria-label="Close">
-							<i className="fa-solid fa-xmark"></i>
-						</button>
-					</div>
-					<div className="modal-body">
-						<p>If you delete this thing the entire universe will go down!</p>
-					</div>
-					<div className="modal-footer">
-						<button type="button" className="btn btn-primary">OH NO!</button>
-						<button type="button" className="btn btn-secondary" onClick={handleDelete} data-dismiss="modal">Yes baby!</button>
-					</div>
-				</div>
-			</div>
-		</div>
+		
 	</div>
 );
 };
