@@ -20,10 +20,10 @@ function agregarContacto(e) {
         return null
     }
     const newContact = {
-        name: name,
-        phone: phone,
-        email: email,
-        address: address
+        name,
+        phone,
+        email,
+        address,
     };
     if (!id) {
         actions.createContact(newContact);
@@ -42,10 +42,12 @@ function agregarContacto(e) {
 useEffect(() => {
     if (id && store.listContacts.length > 0) {
         const currentContact = store.listContacts.find(contact => contact.id == id)
-        setName(currentContact.name)
-        setPhone(currentContact.phone)
-        setEmail(currentContact.email)
-        setAddress(currentContact.address)
+        if (currentContact) {
+            setName(currentContact.full_name)
+            setPhone(currentContact.phone)
+            setEmail(currentContact.email)
+            setAddress(currentContact.address)
+        }
     }
 }, [id, store.listContacts])
 

@@ -56,8 +56,7 @@ const getState = ({ getStore, getActions, setStore }) => {
                     .then((res) => res.json())
                     .then((data) => {
                         console.log(data);
-                        const actions = getActions();
-                        actions.addContactToList(data);
+                        getActions().GetContacts(); // <-- recarga la lista
                     })
                     .catch((error) => console.log("Error creating contact:", error));
             },
