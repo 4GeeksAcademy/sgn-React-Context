@@ -43,7 +43,7 @@ useEffect(() => {
     if (id && store.listContacts.length > 0) {
         const currentContact = store.listContacts.find(contact => contact.id == id)
         if (currentContact) {
-            setName(currentContact.full_name)
+            setName(currentContact.name)
             setPhone(currentContact.phone)
             setEmail(currentContact.email)
             setAddress(currentContact.address)
@@ -60,7 +60,7 @@ return (
             <form onSubmit={agregarContacto}>
                 <div className="mb-3">
                     <label htmlFor="inputName" className="form-label">Full Name</label>
-                    <input type="text" className="form-control" id="inputName" placeholder="Full Name" value={name} onChange={(e) => setName(e.target.value)} />
+                    <input type="text" className="form-control" id="inputName" placeholder="Name" value={name} onChange={(e) => setName(e.target.value)} />
 
                 </div>
                 <div className="mb-3">
